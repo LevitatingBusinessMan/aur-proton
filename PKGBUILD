@@ -134,6 +134,7 @@ source=(
     proton-disable_lock.patch
     proton-user_compat_data.patch
     proton-proton_native_transition.patch
+    kernelbase-return-windows-10-for-apps-without-compat-manifest.patch
 )
 noextract=(
     wine-gecko-${_geckover}-{x86,x86_64}.tar.xz
@@ -238,6 +239,8 @@ prepare() {
         patch -p1 -i "$srcdir"/wine-winevulkan_fsr.patch
         # Adds more 16:10 resolutions for use with FSR
         patch -p1 -i "$srcdir"/wine-more_8x5_res.patch
+        # https://github.com/ValveSoftware/Proton/issues/938#issuecomment-977282442
+        patch -p1 -i "$srcdir"/kernelbase-return-windows-10-for-apps-without-compat-manifest.patch
     popd
 
     pushd dxvk
@@ -251,6 +254,7 @@ prepare() {
     patch -p1 -i "$srcdir"/proton-sanitize_makefile.patch
     patch -p1 -i "$srcdir"/proton-disable_lock.patch
     patch -p1 -i "$srcdir"/proton-user_compat_data.patch
+
 
     # Remove repos from srcdir to save space
     for submodule in "${_submodules[@]}"; do
@@ -385,4 +389,5 @@ sha256sums=('SKIP'
             '20e2a6883d4848ff3d4c59a543e0f20f0b6c3d16d0294272bec2536252f855c8'
             '8be5e0ae9f71d686c72ac094a4eaca14ea288276195d4c0c217a4f3974fbcc70'
             '20f7cd3e70fad6f48d2f1a26a485906a36acf30903bf0eefbf82a7c400e248f3'
-            '958f8e69bc789cc8fbe58cb6c9fc62f065692c3c165f20b0c21133ce94bad736')
+            '958f8e69bc789cc8fbe58cb6c9fc62f065692c3c165f20b0c21133ce94bad736'
+            'bddb8ee1546c114b75fc1cc166b2ca4a3cfa3d302516d3dda9b19510c7743bfe')

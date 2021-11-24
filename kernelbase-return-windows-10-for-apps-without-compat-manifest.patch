@@ -1,0 +1,26 @@
+diff --git a/dlls/kernelbase/version.c b/dlls/kernelbase/version.c
+index d670df27690..bff7a11e378 100644
+--- a/dlls/kernelbase/version.c
++++ b/dlls/kernelbase/version.c
+@@ -127,10 +127,10 @@ typedef struct
+
+
+ /***********************************************************************
+- * Win8 info, reported if the app doesn't provide compat GUID in the manifest and
++ * Win10 info, reported if the app doesn't provide compat GUID in the manifest and
+  * doesn't have higher OS version in PE header.
+  */
+-static const struct version_info windows8_version_info = { 6, 2, 0x23f0 };
++static const struct version_info windows10_version_info = { 10, 0, 0x42ee };
+
+ /***********************************************************************
+  * Win8.1 info, reported if the app doesn't provide compat GUID in the manifest and
+@@ -197,7 +197,7 @@ static BOOL CALLBACK init_current_version(PINIT_ONCE init_once, PVOID parameter,
+             break;
+
+     if (idx < 0) return TRUE;
+-    ver = &windows8_version_info;
++    ver = &windows10_version_info;
+
+     if (RtlQueryInformationActivationContext(0, NtCurrentTeb()->Peb->ActivationContextData, NULL,
+             CompatibilityInformationInActivationContext, NULL, 0, &req) != STATUS_BUFFER_TOO_SMALL
